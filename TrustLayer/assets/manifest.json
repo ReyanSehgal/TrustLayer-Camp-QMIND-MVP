@@ -1,0 +1,82 @@
+[
+  {
+    "sample_id": "genuine_1",
+    "path": "assets/audio/genuine_1.wav",
+    "label": "genuine",
+    "attack_id": "bonafide",
+    "source_url": "https://nii-yamagishilab.github.io/samples-xin/samples-asvspoof2019/sample-human/p226_247.wav",
+    "source_page": "https://nii-yamagishilab.github.io/samples-xin/main-asvspoof2019",
+    "selection": "First four published evaluation showcase rows; one bona fide and one spoof from each. Chosen before inference. Not a random benchmark sample.",
+    "sha256": "e736cc64e59e927a19c60520e1abac5f138590611d3cced18cb906861e956f65"
+  },
+  {
+    "sample_id": "synthetic_1",
+    "path": "assets/audio/synthetic_1.wav",
+    "label": "synthetic",
+    "attack_id": "A07",
+    "source_url": "https://nii-yamagishilab.github.io/samples-xin/samples-asvspoof2019/sample-SS_3_new/p226_c0022.wav",
+    "source_page": "https://nii-yamagishilab.github.io/samples-xin/main-asvspoof2019",
+    "selection": "First four published evaluation showcase rows; one bona fide and one spoof from each. Chosen before inference. Not a random benchmark sample.",
+    "sha256": "0ea9f421db9453119916cd457ff459336c2e13582e437bb9e76c50121c0dc7ad"
+  },
+  {
+    "sample_id": "genuine_2",
+    "path": "assets/audio/genuine_2.wav",
+    "label": "genuine",
+    "attack_id": "bonafide",
+    "source_url": "https://nii-yamagishilab.github.io/samples-xin/samples-asvspoof2019/sample-human/p232_258.wav",
+    "source_page": "https://nii-yamagishilab.github.io/samples-xin/main-asvspoof2019",
+    "selection": "First four published evaluation showcase rows; one bona fide and one spoof from each. Chosen before inference. Not a random benchmark sample.",
+    "sha256": "d5f3fda05091acc858c5df044f34601f8871387112bbc96a90b3fe47bdccfdb6"
+  },
+  {
+    "sample_id": "synthetic_2",
+    "path": "assets/audio/synthetic_2.wav",
+    "label": "synthetic",
+    "attack_id": "A08",
+    "source_url": "https://nii-yamagishilab.github.io/samples-xin/samples-asvspoof2019/sample-SS_5/p232_c0033.wav",
+    "source_page": "https://nii-yamagishilab.github.io/samples-xin/main-asvspoof2019",
+    "selection": "First four published evaluation showcase rows; one bona fide and one spoof from each. Chosen before inference. Not a random benchmark sample.",
+    "sha256": "ee066a506ac9668030c4df204f138704918929438b081bb702a036678697ef62"
+  },
+  {
+    "sample_id": "genuine_3",
+    "path": "assets/audio/genuine_3.wav",
+    "label": "genuine",
+    "attack_id": "bonafide",
+    "source_url": "https://nii-yamagishilab.github.io/samples-xin/samples-asvspoof2019/sample-human/p280_237.wav",
+    "source_page": "https://nii-yamagishilab.github.io/samples-xin/main-asvspoof2019",
+    "selection": "First four published evaluation showcase rows; one bona fide and one spoof from each. Chosen before inference. Not a random benchmark sample.",
+    "sha256": "aa48ff5741323a7e0833f755073aad3f3e63ae388e62b2b6c32f4392580485c2"
+  },
+  {
+    "sample_id": "synthetic_3",
+    "path": "assets/audio/synthetic_3.wav",
+    "label": "synthetic",
+    "attack_id": "A11",
+    "source_url": "https://nii-yamagishilab.github.io/samples-xin/samples-asvspoof2019/sample-SS_8_new/p280_c0012.wav",
+    "source_page": "https://nii-yamagishilab.github.io/samples-xin/main-asvspoof2019",
+    "selection": "First four published evaluation showcase rows; one bona fide and one spoof from each. Chosen before inference. Not a random benchmark sample.",
+    "sha256": "e7e92bcc05519d685db7658f4135e6c250581b7673217509b0abe380cadcdc11"
+  },
+  {
+    "sample_id": "genuine_4",
+    "path": "assets/audio/genuine_4.wav",
+    "label": "genuine",
+    "attack_id": "bonafide",
+    "source_url": "https://nii-yamagishilab.github.io/samples-xin/samples-asvspoof2019/sample-human/p300_244.wav",
+    "source_page": "https://nii-yamagishilab.github.io/samples-xin/main-asvspoof2019",
+    "selection": "First four published evaluation showcase rows; one bona fide and one spoof from each. Chosen before inference. Not a random benchmark sample.",
+    "sha256": "a22a4cdec22a1621948467c351660adf007f4535f727c66eeba1d92fbc32e0f0"
+  },
+  {
+    "sample_id": "synthetic_4",
+    "path": "assets/audio/synthetic_4.wav",
+    "label": "synthetic",
+    "attack_id": "A17",
+    "source_url": "https://nii-yamagishilab.github.io/samples-xin/samples-asvspoof2019/sample-VC_2/p300_p231_234.wav",
+    "source_page": "https://nii-yamagishilab.github.io/samples-xin/main-asvspoof2019",
+    "selection": "First four published evaluation showcase rows; one bona fide and one spoof from each. Chosen before inference. Not a random benchmark sample.",
+    "sha256": "9398167c1f6698ccd05c0cbf25a02fa6fa3968889ebc5e0dad5709ec764aab38"
+  }
+]
