@@ -1,0 +1,164 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-bg: #0b0c0e;
+  --color-s1: #111316;
+  --color-s2: #16191d;
+  --color-s3: #1d2126;
+  --color-line: #22262c;
+  --color-line2: #30353c;
+  --color-ink: #edeef0;
+  --color-ink2: #aab0b8;
+  --color-ink3: #878e97;
+  --color-genuine: #6aa6ff;
+  --color-synthetic: #f2b14c;
+  --color-bad: #ff7a6e;
+  --color-ok: #4cc38a;
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+html,
+body {
+  overflow-x: clip;
+}
+
+html {
+  background: var(--color-bg);
+  color-scheme: dark;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: rgba(106, 166, 255, 0.3);
+}
+
+:focus-visible {
+  outline: 2px solid #9cc3ff;
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+.scrollbar-none {
+  scrollbar-width: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+/* Surfaces: one subtle shadow, no gradients */
+.card {
+  background: var(--color-s1);
+  border: 1px solid var(--color-line);
+  border-radius: 18px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.35), 0 18px 40px -28px rgba(0, 0, 0, 0.9);
+}
+
+/* Hover / focus tooltips: details stay out of the way until asked for */
+.tw {
+  position: relative;
+  display: inline-flex;
+}
+.tt {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 10px);
+  z-index: 40;
+  width: max-content;
+  max-width: 280px;
+  padding: 9px 11px;
+  border-radius: 9px;
+  background: var(--color-s3);
+  border: 1px solid var(--color-line2);
+  box-shadow: 0 12px 28px -12px rgba(0, 0, 0, 0.8);
+  font-size: 12.5px;
+  font-weight: 400;
+  line-height: 1.45;
+  color: var(--color-ink);
+  text-align: left;
+  white-space: normal;
+  opacity: 0;
+  transform: translate(-50%, 4px);
+  pointer-events: none;
+  transition: opacity 0.18s, transform 0.18s;
+}
+.tw:hover > .tt,
+.tw:focus-within > .tt {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+/* Noise sliders */
+.range {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 28px;
+  background: transparent;
+  cursor: pointer;
+}
+.range::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 2px;
+  background: var(--color-line2);
+}
+.range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 22px;
+  height: 22px;
+  margin-top: -9px;
+  border-radius: 50%;
+  background: var(--color-ink);
+  border: 4px solid var(--color-s2);
+  box-shadow: 0 0 0 1px var(--color-line2);
+  transition: transform 0.2s;
+}
+.range:active::-webkit-slider-thumb {
+  transform: scale(1.12);
+}
+.range::-moz-range-track {
+  height: 4px;
+  border-radius: 2px;
+  background: var(--color-line2);
+}
+.range::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--color-ink);
+  border: 4px solid var(--color-s2);
+}
+
+@keyframes tl-scan {
+  from { left: -30%; }
+  to { left: 100%; }
+}
+.scan {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: inherit;
+}
+.scan::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 30%;
+  background: rgba(237, 238, 240, 0.07);
+  animation: tl-scan 1s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
