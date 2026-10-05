@@ -34,6 +34,10 @@ export default function LivePanel({
     const timer = setTimeout(async () => {
       try {
         const c = await scoreLive(clip.sample_id, snr, ctrl.signal);
+        if (ctrl.signal.aborted) {
+          URL.revokeObjectURL(c.audio_path);
+          return;
+        }
         onResult(clip.sample_id, c);
         setDoneKey(`${clip.sample_id}:${snr}`);
         setError("");

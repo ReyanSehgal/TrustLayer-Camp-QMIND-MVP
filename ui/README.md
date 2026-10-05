@@ -83,7 +83,7 @@ the UI finds it through `NEXT_PUBLIC_API_URL` (default `http://localhost:8000`).
   ```
 
 - **Scripts:** `start-api.mjs` finds `TrustLayer/.venv` on macOS, Linux or Windows; `sync-audio.mjs` runs
-  automatically before `dev` and `build`.
+  automatically before `dev`, `dev:live`, and `build`.
 
 ### API
 

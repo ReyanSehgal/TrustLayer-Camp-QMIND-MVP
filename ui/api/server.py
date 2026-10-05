@@ -126,7 +126,10 @@ def score_upload(
     except Exception:
         raise HTTPException(422, "Could not read that audio. Try a WAV or FLAC file.")
     window = scoring.model_window(source)
-    audio = scoring.noisy_window(window, snr_db)
+    try:
+        audio = scoring.noisy_window(window, snr_db)
+    except ValueError as exc:
+        raise HTTPException(422, "Could not add noise to silent audio. Upload a recording containing speech.") from exc
     scale = max(float(abs(window).max()), float(abs(audio).max()), 1e-6)
     with app.state.lock:
         result = scoring.score(app.state.model, audio, scale)

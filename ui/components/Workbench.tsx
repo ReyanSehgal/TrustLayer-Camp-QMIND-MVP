@@ -51,7 +51,8 @@ export default function Workbench() {
   const lastBlob = useRef<string | null>(null);
 
   const clip = results.clips.find((c) => c.sample_id === clipId) ?? results.clips[0];
-  const live = liveResult && liveResult.clipId === clipId ? liveResult.cond : null;
+  const live = liveResult && liveResult.clipId === clipId && liveResult.cond.snr_db === liveSnr ? liveResult.cond : null;
+  const livePending = condId === "live" && (!live || !online);
   const showing: ConditionId = condId === "live" && live ? "live" : condId === "live" ? "original" : condId;
   const cond = showing === "live" && live ? live : conditionOf(clip, showing === "live" ? "original" : showing);
 
@@ -172,20 +173,34 @@ export default function Workbench() {
           <div className="mt-3.5">
             <ConditionSwitch active={condId} liveOnline={online} onSelect={setCondId} />
           </div>
-          {condId === "live" && <LivePanel clip={clip} online={online} snr={liveSnr} onSnr={setLiveSnr} onResult={onLiveResult} />}
+          {condId === "live" && <LivePanel key={clip.sample_id} clip={clip} online={online} snr={liveSnr} onSnr={setLiveSnr} onResult={onLiveResult} />}
           <div className="mt-5 flex flex-wrap items-stretch gap-5">
-            <WaveformPlayer key={clip.sample_id} clip={clip} cond={cond} live={live} online={online} />
-            <Verdict clip={clip} cond={cond} />
+            {livePending ? (
+              <p role="status" aria-live="polite" className="card w-full p-6 text-sm text-ink2">
+                {online ? "Waiting for the result at this noise level…" : "Live scoring is offline. Select a saved condition to view its result."}
+              </p>
+            ) : (
+              <>
+                <WaveformPlayer key={clip.sample_id} clip={clip} cond={cond} live={live} online={online} />
+                <Verdict clip={clip} cond={cond} />
+              </>
+            )}
           </div>
         </Scene>
 
         <Scene index={2} active={active} onActive={setActive}>
           <Kicker n="02">How far it leans</Kicker>
-          <Title muted="toward the line.">Noise pushes the score</Title>
+          <Title muted="and sometimes the verdict.">Noise can change the score</Title>
           <div className="mt-8">
             <ConditionSwitch active={condId} liveOnline={online} onSelect={setCondId} layoutKey="cond-rail" compact />
           </div>
-          <MarginRail clip={clip} active={showing} live={live} onSelect={setCondId} />
+          {livePending ? (
+            <p role="status" aria-live="polite" className="mt-8 text-sm text-ink2">
+              {online ? "Waiting for the result at this noise level…" : "Select a saved condition while live scoring is offline."}
+            </p>
+          ) : (
+            <MarginRail clip={clip} active={showing} live={live} onSelect={setCondId} />
+          )}
           <p className="mt-7 text-[13px] text-ink3">
             <span className="font-mono text-ink2">{clip.sample_id}</span> · margin = genuine score − synthetic score. It shows a lean, not a confidence.
           </p>
@@ -216,6 +231,10 @@ export default function Workbench() {
               </span>
             </Tip>
           </Kicker>
+          <p className="mt-3 text-sm text-ink3">
+            Experimental: this model was evaluated on studio speech. Microphone and phone recordings may behave differently.
+            Your audio has no known label here, so a prediction cannot be marked correct or incorrect.
+          </p>
           <OwnClipPanel online={online} />
         </Scene>
 

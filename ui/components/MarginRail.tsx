@@ -17,7 +17,7 @@ import Tip from "./Tip";
 const pos = (m: number) => Math.min(98.5, Math.max(1.5, 50 + (m / MARGIN_RANGE) * 50));
 const spring = { type: "spring" as const, stiffness: 120, damping: 20 };
 
-// The signature visual: one marker that slides toward the line as noise rises.
+// The signature visual: one marker that moves as the noise level changes.
 export default function MarginRail({
   clip,
   active,

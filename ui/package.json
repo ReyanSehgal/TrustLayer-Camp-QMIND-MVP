@@ -11,6 +11,7 @@
     "predev": "npm run sync-audio",
     "prebuild": "npm run sync-audio",
     "api": "node scripts/start-api.mjs",
+    "predev:live": "npm run sync-audio",
     "dev:live": "concurrently -k -n ui,api -c cyan,magenta \"next dev\" \"node scripts/start-api.mjs\""
   },
   "dependencies": {

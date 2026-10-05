@@ -21,18 +21,28 @@ export default function OwnClipPanel({ online }: { online: boolean }) {
   const lastBlob = useRef<string | null>(null);
   const scoring = !!source && !result && !error;
 
+  useEffect(() => () => {
+    if (lastBlob.current) URL.revokeObjectURL(lastBlob.current);
+  }, []);
+
   useEffect(() => {
     if (!source || !online) return;
     const ctrl = new AbortController();
     const timer = setTimeout(async () => {
       try {
         const r = await scoreUpload(source.blob, source.name, noise, ctrl.signal);
+        if (ctrl.signal.aborted) {
+          URL.revokeObjectURL(r.audio_path);
+          return;
+        }
         if (lastBlob.current) URL.revokeObjectURL(lastBlob.current);
         lastBlob.current = r.audio_path;
         setResult(r);
         setError("");
       } catch (e) {
-        if (!ctrl.signal.aborted) setError(e instanceof Error ? e.message : "Scoring failed.");
+        if (!ctrl.signal.aborted) {
+          setError(e instanceof Error ? e.message : "Scoring failed.");
+        }
       }
     }, 200);
     return () => {
@@ -67,6 +77,8 @@ export default function OwnClipPanel({ online }: { online: boolean }) {
   };
 
   const reset = () => {
+    if (lastBlob.current) URL.revokeObjectURL(lastBlob.current);
+    lastBlob.current = null;
     setSource(null);
     setResult(null);
     setError("");
@@ -126,7 +138,16 @@ export default function OwnClipPanel({ online }: { online: boolean }) {
               </span>
               <div className="flex flex-wrap items-center gap-2.5">
                 <label className="flex cursor-pointer items-center gap-2 text-[13px] text-ink2">
-                  <input type="checkbox" checked={noise !== null} onChange={(e) => setNoise(e.target.checked ? 10 : null)} className="accent-ink" />
+                  <input
+                    type="checkbox"
+                    checked={noise !== null}
+                    onChange={(e) => {
+                      setResult(null);
+                      setError("");
+                      setNoise(e.target.checked ? 10 : null);
+                    }}
+                    className="accent-ink"
+                  />
                   Noise
                 </label>
                 {noise !== null && (
@@ -136,7 +157,11 @@ export default function OwnClipPanel({ online }: { online: boolean }) {
                       min={0}
                       max={40}
                       value={40 - noise}
-                      onChange={(e) => setNoise(40 - Number(e.target.value))}
+                      onChange={(e) => {
+                        setResult(null);
+                        setError("");
+                        setNoise(40 - Number(e.target.value));
+                      }}
                       aria-label="Noise level for your audio. Left quieter, right louder."
                       aria-valuetext={`${noise} decibels signal-to-noise ratio`}
                       className="range w-36"
